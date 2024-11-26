@@ -1,0 +1,56 @@
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe.config
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\Projeto_ARQ.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicocontroller.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicoview.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicocontroller.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicoview.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\SA.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\SA.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\SA.csproj.Up2Date
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\Projeto_ARQ.pdb
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe.config
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.pdb
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicocontroller.dll
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicoview.dll
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicocontroller.pdb
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicoview.pdb
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.Up2Date
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\obj\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\Projeto_ARQ\obj\Debug\Projeto_ARQ.pdb
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe.config
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.pdb
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicocontroller.dll
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicoview.dll
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicocontroller.pdb
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicoview.pdb
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.Up2Date
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\Projeto_ARQ.pdb
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe.config
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\Projeto_ARQ.pdb
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicocontroller.dll
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicomodel.dll
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicoview.dll
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicocontroller.pdb
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicomodel.pdb
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\bin\Debug\academicoview.pdb
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.AssemblyReference.cache
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.CoreCompileInputs.cache
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\SA.csproj.Up2Date
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\Projeto_ARQ.exe
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\Projeto_ARQ\obj\Debug\Projeto_ARQ.pdb

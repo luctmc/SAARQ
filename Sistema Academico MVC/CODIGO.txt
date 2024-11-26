@@ -1,0 +1,868 @@
+Código Completo em MVC com conexão em BANCO
+
+SA
+
+App.config
+
+<configuration>
+	<startup>
+		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+	</startup>
+	<connectionStrings>
+		<add name="SistemaAcademicoDB"
+             connectionString="Server=BRJND02L\\MSSQLSERVER01;Database=SistemaAcademicoDB;Trusted_Connection=True;"
+             providerName="System.Data.SqlClient" />
+	</connectionStrings>
+	<appSettings>
+		<add key="caminhoBanco" value="C:\Temp\" />
+		<add key="nomeBancoCursos" value="cursos.csv" />
+		<add key="nomeBancoDisciplinas" value="disciplinas.csv" />
+		<add key="nomeBancoPeriodos" value="periodos.csv" />
+	</appSettings>
+</configuration>
+
+Program.cs
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+using SAview;
+
+namespace SA
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            menuPrincipal menu = new menuPrincipal();
+            menu.ExibirMenu(); 
+        }
+    }
+}
+
+SAcontroller
+
+Cursos_act.cs
+
+using System;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
+using SAmodel;
+
+namespace SAcontroller
+{
+    public class Cursos_act
+    {
+        private string connectionString = ConfigurationManager.ConnectionStrings["SistemaAcademicoDB"].ConnectionString;
+        private string caminho = Path.Combine(ConfigurationManager.AppSettings["caminhoBanco"], ConfigurationManager.AppSettings["nomeBancoCursos"]);
+
+        public void inserir()
+        {
+            Console.Write("Digite o ID do curso: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.Write("Digite o nome do curso: ");
+            string nome = Console.ReadLine();
+            Console.Write("Digite a sigla do curso: ");
+            string sigla = Console.ReadLine();
+            Console.Write("Digite uma observação para o curso: ");
+            string obs = Console.ReadLine();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "INSERT INTO Cursos (cursoid, cursonome, cursosig, cursoobs) VALUES (@id, @nome, @sigla, @obs)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@nome", nome);
+                cmd.Parameters.AddWithValue("@sigla", sigla);
+                cmd.Parameters.AddWithValue("@obs", obs);
+                cmd.ExecuteNonQuery();
+            }
+
+            // Salvar em CSV
+            SalvarCursosEmCsv(id, nome, sigla, obs);
+
+            Console.WriteLine("Curso inserido com sucesso!");
+            Console.ReadKey();
+        }
+
+        private void SalvarCursosEmCsv(int id, string nome, string sigla, string obs)
+        {
+            try
+            {
+                bool existe = File.Exists(caminho);
+                using (StreamWriter writer = new StreamWriter(caminho, true))
+                {
+                    if (!existe) writer.WriteLine("cursoid,cursonome,cursosig,cursoobs"); // Cabeçalho do CSV
+                    writer.WriteLine($"{id},{nome},{sigla},{obs}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao salvar no CSV: " + ex.Message);
+            }
+        }
+
+        public void alterar()
+        {
+            Console.Write("Digite o ID do curso que deseja alterar: ");
+            int id = int.Parse(Console.ReadLine());
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string querySelect = "SELECT * FROM Cursos WHERE cursoid = @id";
+                SqlCommand cmdSelect = new SqlCommand(querySelect, conn);
+                cmdSelect.Parameters.AddWithValue("@id", id);
+
+                using (SqlDataReader reader = cmdSelect.ExecuteReader())
+                {
+                    if (!reader.HasRows)
+                    {
+                        Console.WriteLine("Curso não encontrado.");
+                        Console.ReadKey();
+                        return;
+                    }
+                }
+            }
+
+            Console.Write("Digite o novo nome do curso: ");
+            string novoNome = Console.ReadLine();
+            Console.Write("Digite a nova sigla do curso: ");
+            string novaSigla = Console.ReadLine();
+            Console.Write("Digite a nova observação para o curso: ");
+            string novaObs = Console.ReadLine();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string queryUpdate = "UPDATE Cursos SET cursonome = @nome, cursosig = @sigla, cursoobs = @obs WHERE cursoid = @id";
+                SqlCommand cmdUpdate = new SqlCommand(queryUpdate, conn);
+                cmdUpdate.Parameters.AddWithValue("@id", id);
+                cmdUpdate.Parameters.AddWithValue("@nome", novoNome);
+                cmdUpdate.Parameters.AddWithValue("@sigla", novaSigla);
+                cmdUpdate.Parameters.AddWithValue("@obs", novaObs);
+                cmdUpdate.ExecuteNonQuery();
+            }
+
+            // Atualizar CSV
+            AtualizarCursosCsv();
+
+            Console.WriteLine("Curso alterado com sucesso!");
+            Console.ReadKey();
+        }
+
+        private void AtualizarCursosCsv()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Cursos";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        using (StreamWriter writer = new StreamWriter(caminho))
+                        {
+                            writer.WriteLine("cursoid,cursonome,cursosig,cursoobs");
+                            while (reader.Read())
+                            {
+                                writer.WriteLine($"{reader["cursoid"]},{reader["cursonome"]},{reader["cursosig"]},{reader["cursoobs"]}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao atualizar o CSV: " + ex.Message);
+            }
+        }
+
+        public void excluir()
+        {
+            Console.Write("Digite o ID do curso que deseja excluir: ");
+            int id = int.Parse(Console.ReadLine());
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string queryDelete = "DELETE FROM Cursos WHERE cursoid = @id";
+                SqlCommand cmdDelete = new SqlCommand(queryDelete, conn);
+                cmdDelete.Parameters.AddWithValue("@id", id);
+
+                int rowsAffected = cmdDelete.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Curso excluído com sucesso!");
+                }
+                else
+                {
+                    Console.WriteLine("Curso não encontrado.");
+                }
+            }
+
+            // Atualizar CSV
+            AtualizarCursosCsv();
+
+            Console.ReadKey();
+        }
+
+        public void exibirTodos()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Cursos";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($"{reader["cursoid"]} - {reader["cursonome"]} - {reader["cursosig"]} - {reader["cursoobs"]}");
+                        }
+                    }
+                }
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu um erro ao exibir os cursos: " + ex.Message);
+            }
+            finally
+            {
+                Console.ReadKey(); // Aguarda o usuário pressionar uma tecla
+            }
+        }
+    }
+}
+
+
+Disciplinas_act.cs
+
+using System;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
+using SAmodel;
+
+namespace SAcontroller
+{
+    public class Disciplinas_act
+    {
+        private string connectionString = ConfigurationManager.ConnectionStrings["SistemaAcademicoDB"].ConnectionString;
+        private string caminho = Path.Combine(ConfigurationManager.AppSettings["caminhoBanco"], ConfigurationManager.AppSettings["nomeBancoDisciplinas"]);
+
+        public void inserir()
+        {
+            Console.Write("Digite o ID da disciplina: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.Write("Digite o nome da disciplina: ");
+            string nome = Console.ReadLine();
+            Console.Write("Digite a sigla da disciplina: ");
+            string sigla = Console.ReadLine();
+            Console.Write("Digite uma observação para a disciplina: ");
+            string obs = Console.ReadLine();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "INSERT INTO Disciplinas (disid, disnome, dissig, disobs) VALUES (@id, @nome, @sigla, @obs)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@nome", nome);
+                cmd.Parameters.AddWithValue("@sigla", sigla);
+                cmd.Parameters.AddWithValue("@obs", obs);
+                cmd.ExecuteNonQuery();
+            }
+
+            SalvarDisciplinasEmCsv(id, nome, sigla, obs);
+
+            Console.WriteLine("Disciplina inserida com sucesso!");
+            Console.ReadKey();
+        }
+
+        private void SalvarDisciplinasEmCsv(int id, string nome, string sigla, string obs)
+        {
+            try
+            {
+                bool existe = File.Exists(caminho);
+                using (StreamWriter writer = new StreamWriter(caminho, true))
+                {
+                    if (!existe) writer.WriteLine("disid,disnome,dissig,disobs");
+                    writer.WriteLine($"{id},{nome},{sigla},{obs}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao salvar no CSV: " + ex.Message);
+            }
+        }
+
+        public void alterar()
+        {
+            Console.Write("Digite o ID da disciplina que deseja alterar: ");
+            int id = int.Parse(Console.ReadLine());
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string querySelect = "SELECT * FROM Disciplinas WHERE disid = @id";
+                SqlCommand cmdSelect = new SqlCommand(querySelect, conn);
+                cmdSelect.Parameters.AddWithValue("@id", id);
+
+                using (SqlDataReader reader = cmdSelect.ExecuteReader())
+                {
+                    if (!reader.HasRows)
+                    {
+                        Console.WriteLine("Disciplina não encontrada.");
+                        Console.ReadKey();
+                        return;
+                    }
+                }
+            }
+
+            Console.Write("Digite o novo nome da disciplina: ");
+            string novoNome = Console.ReadLine();
+            Console.Write("Digite a nova sigla da disciplina: ");
+            string novaSigla = Console.ReadLine();
+            Console.Write("Digite a nova observação para a disciplina: ");
+            string novaObs = Console.ReadLine();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string queryUpdate = "UPDATE Disciplinas SET disnome = @nome, dissig = @sigla, disobs = @obs WHERE disid = @id";
+                SqlCommand cmdUpdate = new SqlCommand(queryUpdate, conn);
+                cmdUpdate.Parameters.AddWithValue("@id", id);
+                cmdUpdate.Parameters.AddWithValue("@nome", novoNome);
+                cmdUpdate.Parameters.AddWithValue("@sigla", novaSigla);
+                cmdUpdate.Parameters.AddWithValue("@obs", novaObs);
+                cmdUpdate.ExecuteNonQuery();
+            }
+
+            AtualizarDisciplinasCsv();
+
+            Console.WriteLine("Disciplina alterada com sucesso!");
+            Console.ReadKey();
+        }
+
+        private void AtualizarDisciplinasCsv()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Disciplinas";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        using (StreamWriter writer = new StreamWriter(caminho))
+                        {
+                            writer.WriteLine("disid,disnome,dissig,disobs");
+                            while (reader.Read())
+                            {
+                                writer.WriteLine($"{reader["disid"]},{reader["disnome"]},{reader["dissig"]},{reader["disobs"]}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao atualizar o CSV: " + ex.Message);
+            }
+        }
+
+        public void excluir()
+        {
+            Console.Write("Digite o ID da disciplina que deseja excluir: ");
+            int id = int.Parse(Console.ReadLine());
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string queryDelete = "DELETE FROM Disciplinas WHERE disid = @id";
+                SqlCommand cmdDelete = new SqlCommand(queryDelete, conn);
+                cmdDelete.Parameters.AddWithValue("@id", id);
+
+                int rowsAffected = cmdDelete.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Disciplina excluída com sucesso!");
+                }
+                else
+                {
+                    Console.WriteLine("Disciplina não encontrada.");
+                }
+            }
+
+            AtualizarDisciplinasCsv();
+
+            Console.ReadKey();
+        }
+
+        public void exibirTodos()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Disciplinas";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($"{reader["disid"]} - {reader["disnome"]} - {reader["dissig"]} - {reader["disobs"]}");
+                        }
+                    }
+                }
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu um erro ao exibir as disciplinas: " + ex.Message);
+            }
+            finally
+            {
+                Console.ReadKey();
+            }
+        }
+    }
+}
+
+
+Periodos_act.cs
+
+using System;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
+using SAomodel;
+
+namespace SAcontroller
+{
+    public class Periodos_act
+    {
+        private string connectionString = ConfigurationManager.ConnectionStrings["SistemaAcademicoDB"].ConnectionString;
+        private string caminho = Path.Combine(ConfigurationManager.AppSettings["caminhoBanco"], ConfigurationManager.AppSettings["nomeBancoPeriodos"]);
+
+        public void inserir()
+        {
+            Console.Write("Digite o ID do período: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.Write("Digite o nome do período: ");
+            string nome = Console.ReadLine();
+            Console.Write("Digite a sigla do período: ");
+            string sigla = Console.ReadLine();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "INSERT INTO Periodos (perid, pernome, persigla) VALUES (@id, @nome, @sigla)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@nome", nome);
+                cmd.Parameters.AddWithValue("@sigla", sigla);
+                cmd.ExecuteNonQuery();
+            }
+
+            SalvarPeriodosEmCsv(id, nome, sigla);
+
+            Console.WriteLine("Período inserido com sucesso!");
+            Console.ReadKey();
+        }
+
+        private void SalvarPeriodosEmCsv(int id, string nome, string sigla)
+        {
+            try
+            {
+                bool existe = File.Exists(caminho);
+                using (StreamWriter writer = new StreamWriter(caminho, true))
+                {
+                    if (!existe) writer.WriteLine("perid,pernome,persigla");
+                    writer.WriteLine($"{id},{nome},{sigla}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao salvar no CSV: " + ex.Message);
+            }
+        }
+
+        public void alterar()
+        {
+            Console.Write("Digite o ID do período que deseja alterar: ");
+            int id = int.Parse(Console.ReadLine());
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string querySelect = "SELECT * FROM Periodos WHERE perid = @id";
+                SqlCommand cmdSelect = new SqlCommand(querySelect, conn);
+                cmdSelect.Parameters.AddWithValue("@id", id);
+
+                using (SqlDataReader reader = cmdSelect.ExecuteReader())
+                {
+                    if (!reader.HasRows)
+                    {
+                        Console.WriteLine("Período não encontrado.");
+                        Console.ReadKey();
+                        return;
+                    }
+                }
+            }
+
+            Console.Write("Digite o novo nome do período: ");
+            string novoNome = Console.ReadLine();
+            Console.Write("Digite a nova sigla do período: ");
+            string novaSigla = Console.ReadLine();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string queryUpdate = "UPDATE Periodos SET pernome = @nome, persigla = @sigla WHERE perid = @id";
+                SqlCommand cmdUpdate = new SqlCommand(queryUpdate, conn);
+                cmdUpdate.Parameters.AddWithValue("@id", id);
+                cmdUpdate.Parameters.AddWithValue("@nome", novoNome);
+                cmdUpdate.Parameters.AddWithValue("@sigla", novaSigla);
+                cmdUpdate.ExecuteNonQuery();
+            }
+
+            AtualizarPeriodosCsv();
+
+            Console.WriteLine("Período alterado com sucesso!");
+            Console.ReadKey();
+        }
+
+        private void AtualizarPeriodosCsv()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Periodos";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        using (StreamWriter writer = new StreamWriter(caminho))
+                        {
+                            writer.WriteLine("perid,pernome,persigla");
+                            while (reader.Read())
+                            {
+                                writer.WriteLine($"{reader["perid"]},{reader["pernome"]},{reader["persigla"]}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao atualizar o CSV: " + ex.Message);
+            }
+        }
+
+        public void excluir()
+        {
+            Console.Write("Digite o ID do período que deseja excluir: ");
+            int id = int.Parse(Console.ReadLine());
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string queryDelete = "DELETE FROM Periodos WHERE perid = @id";
+                SqlCommand cmdDelete = new SqlCommand(queryDelete, conn);
+                cmdDelete.Parameters.AddWithValue("@id", id);
+
+                int rowsAffected = cmdDelete.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Período excluído com sucesso!");
+                }
+                else
+                {
+                    Console.WriteLine("Período não encontrado.");
+                }
+            }
+
+            AtualizarPeriodosCsv();
+
+            Console.ReadKey();
+        }
+
+        public void exibirTodos()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Periodos";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($"{reader["perid"]} - {reader["pernome"]} - {reader["persigla"]}");
+                        }
+                    }
+                }
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu um erro ao exibir os períodos: " + ex.Message);
+            }
+            finally
+            {
+                Console.ReadKey();
+            }
+        }
+    }
+}
+
+
+SAmodel
+
+Curso.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SAmodel
+{
+    public class Curso
+    {
+        public int cursoid { get; set; }
+
+        public string cursonome { get; set; }
+
+        public string cursosig { get; set; }
+
+        public string cursoobs { get; set; }
+    }
+}
+
+
+Disciplina.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SAmodel
+{
+    public class Disciplina
+    {
+        public int disid { get; set; }
+
+        public string disnome { get; set; }
+
+        public string dissig { get; set; }
+
+        public string disobs { get; set; }
+    }
+}
+
+
+Periodo.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SAomodel
+{
+    public class Periodo
+    {
+        public int perid { get; set; }
+
+        public string pernome { get; set; }
+
+        public string persigla { get; set; }
+    }    
+}
+
+
+SAview
+
+menuPrincipal.cs
+
+using System;
+using SAcontroller;
+
+namespace SAview
+{
+    public class menuPrincipal
+    {
+        private Cursos_act cursosController = new Cursos_act();
+        private Disciplinas_act disciplinasController = new Disciplinas_act();
+        private Periodos_act periodosController = new Periodos_act();
+
+        public void ExibirMenu()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Sistema Acadêmico - Menu Principal");
+                Console.WriteLine("1. Operações de Cursos");
+                Console.WriteLine("2. Operações de Disciplinas");
+                Console.WriteLine("3. Operações de Períodos");
+                Console.WriteLine("4. Sair");
+                Console.Write("Escolha uma opção: ");
+
+                string opcao = Console.ReadLine();
+                switch (opcao)
+                {
+                    case "1":
+                        MenuCursos();
+                        break;
+                    case "2":
+                        MenuDisciplinas();
+                        break;
+                    case "3":
+                        MenuPeriodos();
+                        break;
+                    case "4":
+                        return;
+                    default:
+                        Console.WriteLine("Opção inválida!");
+                        break;
+                }
+            }
+        }
+
+        private void MenuCursos()
+        {
+            Console.Clear();
+            Console.WriteLine("Operações de Cursos");
+            Console.WriteLine("1. Inserir Curso");
+            Console.WriteLine("2. Exibir Todos os Cursos");
+            Console.WriteLine("3. Alterar Curso");
+            Console.WriteLine("4. Excluir Curso");
+            Console.WriteLine("5. Voltar");
+            Console.Write("Escolha uma opção: ");
+
+            string opcao = Console.ReadLine();
+            switch (opcao)
+            {
+                case "1":
+                    cursosController.inserir(); // Chama o método de inserção no controlador
+                    break;
+                case "2":
+                    cursosController.exibirTodos(); // Chama o método de exibição no controlador
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    cursosController.alterar(); // Chama o método de alteração no controlador
+                    break;
+                case "4":
+                    cursosController.excluir(); // Chama o método de exclusão no controlador
+                    break;
+                case "5":
+                    return;
+                default:
+                    Console.WriteLine("Opção inválida!");
+                    break;
+            }
+        }
+
+        private void MenuDisciplinas()
+        {
+            Console.Clear();
+            Console.WriteLine("Operações de Disciplinas");
+            Console.WriteLine("1. Inserir Disciplina");
+            Console.WriteLine("2. Exibir Todas as Disciplinas");
+            Console.WriteLine("3. Alterar Disciplina");
+            Console.WriteLine("4. Excluir Disciplina");
+            Console.WriteLine("5. Voltar");
+            Console.Write("Escolha uma opção: ");
+
+            string opcao = Console.ReadLine();
+            switch (opcao)
+            {
+                case "1":
+                    disciplinasController.inserir(); // Chama o método de inserção no controlador
+                    break;
+                case "2":
+                    disciplinasController.exibirTodos(); // Chama o método de exibição no controlador
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    disciplinasController.alterar(); // Chama o método de alteração no controlador
+                    break;
+                case "4":
+                    disciplinasController.excluir(); // Chama o método de exclusão no controlador
+                    break;
+                case "5":
+                    return;
+                default:
+                    Console.WriteLine("Opção inválida!");
+                    break;
+            }
+        }
+
+        private void MenuPeriodos()
+        {
+            Console.Clear();
+            Console.WriteLine("Operações de Períodos");
+            Console.WriteLine("1. Inserir Período");
+            Console.WriteLine("2. Exibir Todos os Períodos");
+            Console.WriteLine("3. Alterar Período");
+            Console.WriteLine("4. Excluir Período");
+            Console.WriteLine("5. Voltar");
+            Console.Write("Escolha uma opção: ");
+
+            string opcao = Console.ReadLine();
+            switch (opcao)
+            {
+                case "1":
+                    periodosController.inserir(); // Chama o método de inserção no controlador
+                    break;
+                case "2":
+                    periodosController.exibirTodos(); // Chama o método de exibição no controlador
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    periodosController.alterar(); // Chama o método de alteração no controlador
+                    break;
+                case "4":
+                    periodosController.excluir(); // Chama o método de exclusão no controlador
+                    break;
+                case "5":
+                    return;
+                default:
+                    Console.WriteLine("Opção inválida!");
+                    break;
+            }
+        }
+    }
+}

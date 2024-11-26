@@ -1,0 +1,24 @@
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\SAmodel.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\SAmodel.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\academicomodel\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\academicomodel\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\academicomodel\obj\Debug\SAmodel.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\academicomodel\obj\Debug\SAmodel.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\academicomodel\obj\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\Sistema Academico MVC\academicomodel\obj\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\SAmodel.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\SAmodel.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\academicomodel.pdb
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\bin\Debug\academicomodel.dll
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\bin\Debug\academicomodel.pdb
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\SAmodel.csproj.AssemblyReference.cache
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\SAmodel.csproj.CoreCompileInputs.cache
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\academicomodel.dll
+C:\Users\luc\Documents\Desenvolvimento\Sistema-Acad-mico-MVC-main\Sistema Academico MVC\academicomodel\obj\Debug\academicomodel.pdb

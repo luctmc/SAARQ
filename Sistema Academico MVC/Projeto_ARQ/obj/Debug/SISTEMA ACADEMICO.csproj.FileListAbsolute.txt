@@ -1,0 +1,14 @@
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\SISTEMA ACADEMICO.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\SISTEMA ACADEMICO.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe.config
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\Projeto_ARQ.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicocontroller.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicoview.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicocontroller.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\bin\Debug\academicoview.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\SISTEMA .A28DDBF3.Up2Date
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\Projeto_ARQ.exe
+C:\Users\lmcastro\Desktop\AULA_05_11\Projeto_ARQ\obj\Debug\Projeto_ARQ.pdb

@@ -1,0 +1,12 @@
+C:\Users\Jose\Downloads\AULA_06-11-24\AULA_30-10-02\SLA-main\Projeto_ARQ\academicomodel\bin\Debug\academicomodel.dll
+C:\Users\Jose\Downloads\AULA_06-11-24\AULA_30-10-02\SLA-main\Projeto_ARQ\academicomodel\bin\Debug\academicomodel.pdb
+C:\Users\Jose\Downloads\AULA_06-11-24\AULA_30-10-02\SLA-main\Projeto_ARQ\academicomodel\obj\Debug\academicomodel.csproj.AssemblyReference.cache
+C:\Users\Jose\Downloads\AULA_06-11-24\AULA_30-10-02\SLA-main\Projeto_ARQ\academicomodel\obj\Debug\academicomodel.csproj.CoreCompileInputs.cache
+C:\Users\Jose\Downloads\AULA_06-11-24\AULA_30-10-02\SLA-main\Projeto_ARQ\academicomodel\obj\Debug\academicomodel.dll
+C:\Users\Jose\Downloads\AULA_06-11-24\AULA_30-10-02\SLA-main\Projeto_ARQ\academicomodel\obj\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\bin\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\bin\Debug\academicomodel.pdb
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\academicomodel.csproj.AssemblyReference.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\academicomodel.csproj.CoreCompileInputs.cache
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\academicomodel.dll
+C:\Users\lmcastro\Desktop\AULA_05_11\academicomodel\obj\Debug\academicomodel.pdb
